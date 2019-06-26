@@ -2,7 +2,11 @@
   
   <ul>
     <li v-for="(animal, index) in animals" :key="index">
-        <span style="font-weight:bold;">{{ animal.type }}:</span> {{ animal.name }} {{ animal.date }}
+        {{ animal.type }}: 
+        <span style="font-weight:bold;">{{ animal.name }}</span>, 
+        <span style="font-style:italic;">{{ animal.date ? animal.date : 'undefined' }} </span>
+
+        <button @click="removeAnimal">Remove animal</button>
     </li>
   </ul>
 
@@ -22,7 +26,15 @@ export default {
       ],
 
     } //...return
-  } //...data
+  }, //...data
+
+  methods: {
+
+    removeAnimal(index) {
+      this.animals.splice(index, 1)
+    }, //...removeAnimal
+
+  } //...methods
   
 }
 </script>
