@@ -46,6 +46,14 @@
     </li>
   </ul>
 
+
+  <h5>All sectors:</h5>
+  <ul>
+    <li v-for="(sector, index) in sectors" :key="index">
+      <button @click="animalsInSector(sector)">{{ sector }}</button>
+    </li>
+  </ul>
+
   </div>
 </template>
 
@@ -62,7 +70,7 @@ export default {
       },
 
       sectors: [
-        'bird', 'lizard', 'mammal', 'fish'
+        'bird', 'lizard', 'mammal', 'fish', 'insect'
       ],
 
       animals: [
@@ -80,7 +88,7 @@ export default {
 
     removeAnimal(index) {
       this.animals.splice(index, 1)
-    }, //...removeAnimal
+    }, 
 
     moveToTop(index) {
       let animalCopy = this.animals[index];
@@ -97,7 +105,12 @@ export default {
         date: '',
         sector: ''
       };
-    }, //...addAnimal
+    }, 
+
+    animalsInSector(sector) {
+      let animalsInSector = this.animals.filter(animal => animal.sector === sector).map(animal => animal.name)
+      alert(animalsInSector)
+    },
 
 
 
