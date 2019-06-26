@@ -1,7 +1,7 @@
 <template>
   <div>
 
-  <form @submit.prevent="addAnimal">
+  <form @submit.prevent="addAnimal" >
 
     <div style="margin:0.5rem;">
       <label for="type">Type</label>
@@ -19,6 +19,13 @@
     </div>
 
     <div style="margin:0.5rem;">
+      <label for="sector">Sector</label>
+      <select v-model="animal.sector">
+        <option v-for="(sector, index) in sectors" :key="index" >{{ sector }}</option>
+      </select>
+    </div>
+
+    <div style="margin:0.5rem;">
       <button >Add animal</button>
     </div>
 
@@ -32,7 +39,8 @@
 
         {{ animal.type }}: 
         <span style="font-weight:bold;">{{ animal.name }}</span>, 
-        <span style="font-style:italic;">{{ animal.date ? animal.date : 'undefined' }} </span>
+        <span style="font-style:italic;">{{ animal.date ? animal.date : 'undefined' }}, </span>
+        {{ animal.sector }}
 
         <button @click="removeAnimal(index)">Remove animal</button>
     </li>
@@ -49,15 +57,20 @@ export default {
       animal: {
         type: '', 
         name: '', 
-        date: ''
+        date: '',
+        sector: ''
       },
 
+      sectors: [
+        'bird', 'lizard', 'mammal', 'fish'
+      ],
+
       animals: [
-        { type: 'Parrot', name: 'Pera', date: '17.02.2019' },
-        { type: 'Dog', name: 'Boba', date: '11.07.2013' },
-        { type: 'Cat', name: 'Kitty', date: '' },
-        { type: 'Horse', name: 'Kan', date: '' },
-        { type: 'Sheep', name: 'Shone', date: '21.11.2016' }
+        { type: 'Parrot', name: 'Pera', date: '17.02.2019', sector:'bird' },
+        { type: 'Dog', name: 'Boba', date: '11.07.2013', sector:'mammal' },
+        { type: 'Cat', name: 'Kitty', date: '', sector:'mammal' },
+        { type: 'Horse', name: 'Kan', date: '', sector:'mammal' },
+        { type: 'Sheep', name: 'Shone', date: '21.11.2016', sector:'mammal' }
       ],
 
     } //...return
@@ -81,7 +94,8 @@ export default {
       this.animal = {
         type: '', 
         name: '', 
-        date: ''
+        date: '',
+        sector: ''
       };
     }, //...addAnimal
 
